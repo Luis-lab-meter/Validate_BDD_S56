@@ -6,10 +6,16 @@ Dim MeterColumn As Integer
 MeterColumn=? 'Colonne du numéro de compteur = ?
 
 
-'Éliminer les números des compteurs qui se truvent plus d'un fois dans el rapport MVRS de S 56 
-Sub RemoveDuplicatesByMeter()
-    Columns(MeterColumn).RemoveDuplicates Columns:=Array(1)
+'OK Éliminer les números des compteurs qui se truvent plus d'un fois dans el rapport MVRS de S56 
+Sub RemoveDuplicateMeter()
+    With Sheets("MVRS")
+        Dim LastRow As Long
+        LastRow = .Cells(.Rows.Count, "C").End(xlUp).Row
+        Range("A1:C" & LastRow).Select
+        ActiveSheet.Range("A1:C" & LastRow).RemoveDuplicates Columns:=2, Header:=xlYes
+    End With
 End Sub
+'End OK
 
 ' https://excelmacromastery.com/
 Sub StringVLookup()
