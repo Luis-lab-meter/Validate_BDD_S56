@@ -7,12 +7,12 @@ MeterColumn=? 'Colonne du numéro de compteur = ?
 
 
 'OK Éliminer les números des compteurs qui se truvent plus d'un fois dans el rapport MVRS de S56 
+'Remove double Meter Number
 Sub RemoveDuplicateMeter()
     With Sheets("MVRS")
         Dim LastRow As Long
         LastRow = .Cells(.Rows.Count, "C").End(xlUp).Row
-        Range("A1:C" & LastRow).Select
-        ActiveSheet.Range("A1:C" & LastRow).RemoveDuplicates Columns:=2, Header:=xlYes
+        Range("A1:V" & LastRow).RemoveDuplicates Columns:=6, Header:=xlYes
     End With
 End Sub
 'End OK
