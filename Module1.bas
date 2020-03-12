@@ -1,19 +1,32 @@
-Option Explicit
-
-Dim MeterColumn As Integer
-
-
-MeterColumn=? 'Colonne du numéro de compteur = ?
 
 
 'OK Éliminer les números des compteurs qui se truvent plus d'un fois dans el rapport MVRS de S56 
+Option Explicit
+Dim LastRowMVRS As Long
+Dim LastRowHEBDO As Long
+
+
 'Remove double Meter Number
 Sub RemoveDuplicateMeter()
     With Sheets("MVRS")
-        Dim LastRow As Long
-        LastRow = .Cells(.Rows.Count, "C").End(xlUp).Row
-        Range("A1:V" & LastRow).RemoveDuplicates Columns:=6, Header:=xlYes
+        LastRowMVRS = .Cells(.Rows.Count, "F").End(xlUp).Row
+        Range("A1:V" & LastRowMVRS).RemoveDuplicates Columns:=6, Header:=xlYes
     End With
+End Sub
+
+
+' https://excelmacromastery.com/
+Sub StringVLookup()
+With Sheets("HEBDO")
+    LastRowHEBDO = .Cells(.Rows.Count, "A").End(xlUp).Row
+End With
+    Dim sRes As Variant
+    Dim MeterNum As Variant
+    MeterNum = Sheets("MVRS").Range("F2").Value
+    sRes = Application.VLookup(MeterNum, Worksheets("HEBDO").Range("A1:FS16243"), 2, False)
+    
+    sRes = sRes
+    
 End Sub
 'End OK
 
