@@ -17,30 +17,21 @@ End Sub
 
 ' https://excelmacromastery.com/
 Sub StringVLookup()
+  Dim i As Integer
 With Sheets("HEBDO")
     LastRowHEBDO = .Cells(.Rows.Count, "A").End(xlUp).Row
 End With
-    Dim sRes As Variant
+    Dim ValFinded As Variant
     Dim MeterNum As Variant
-    MeterNum = Sheets("MVRS").Range("F2").Value
-    sRes = Application.VLookup(MeterNum, Worksheets("HEBDO").Range("A1:FS16243"), 2, False)
-    
-    sRes = sRes
-    
+     
+    For i = 2 to LastRowHEBDO
+      MeterNum = Sheets("MVRS").Range("F" & i).Value
+      ValFinded = Application.VLookup(MeterNum, Worksheets("HEBDO").Range("A1:FS" & LastRowHEBDO), 2, False)
+      Sheets("MVRS").Range("M" & i)=ValFinded
+    Next i
+
 End Sub
 'End OK
-
-' https://excelmacromastery.com/
-Sub StringVLookup()
-    
-    Dim sFruit As String
-    sFruit = "Plum"
-    
-    Dim sRes As Variant
-    sRes = Application.VLookup( _
-                       sFruit, shData.Range("A2:B7"), 2, False)
-    
-End Sub
 
 
 Sub Filter()
